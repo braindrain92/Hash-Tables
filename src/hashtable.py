@@ -51,7 +51,22 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        self.size += 1
+        index = self._hash(key)
+        node = self.storage[index]
+
+        if node is None:
+            self.storage[index] = LinkedPair(key, value)
+            return
+
+        prev = node
+        while node is not None:
+            if prev.key == key:
+                prev.value = value
+            prev = node
+            node = node.next
+
+        prev.next = LinkedPair(key, value)
 
 
 
